@@ -801,6 +801,10 @@ macro(add_llvm_executable name)
     target_link_libraries(${name} PRIVATE ${LLVM_PTHREAD_LIB})
   endif()
 
+  if (LLVM_ENABLE_THREADS AND HAVE_LIBATOMIC)
+    target_link_libraries(${name} PRIVATE atomic)
+  endif()
+
   llvm_codesign(${name} ENTITLEMENTS ${ARG_ENTITLEMENTS} BUNDLE_PATH ${ARG_BUNDLE_PATH})
 endmacro(add_llvm_executable name)
 
