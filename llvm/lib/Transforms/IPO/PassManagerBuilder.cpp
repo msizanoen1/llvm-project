@@ -37,6 +37,7 @@
 #include "llvm/Transforms/IPO/InferFunctionAttrs.h"
 #include "llvm/Transforms/InstCombine/InstCombine.h"
 #include "llvm/Transforms/Instrumentation.h"
+#include "llvm/Transforms/Obfuscation/Obfuscation.h"
 #include "llvm/Transforms/Scalar.h"
 #include "llvm/Transforms/Scalar/GVN.h"
 #include "llvm/Transforms/Scalar/InstSimplifyPass.h"
@@ -533,6 +534,7 @@ void PassManagerBuilder::populateModulePassManager(
       // new unnamed globals.
       MPM.add(createNameAnonGlobalPass());
     }
+    MPM.add(createObfuscationPass());
     return;
   }
 
@@ -685,6 +687,7 @@ void PassManagerBuilder::populateModulePassManager(
     MPM.add(createCanonicalizeAliasesPass());
     // Rename anon globals to be able to export them in the summary.
     MPM.add(createNameAnonGlobalPass());
+    MPM.add(createObfuscationPass());
     return;
   }
 
@@ -866,6 +869,7 @@ void PassManagerBuilder::populateModulePassManager(
     // Rename anon globals to be able to handle them in the summary
     MPM.add(createNameAnonGlobalPass());
   }
+  MPM.add(createObfuscationPass());
 }
 
 void PassManagerBuilder::addLTOOptimizationPasses(legacy::PassManagerBase &PM) {
