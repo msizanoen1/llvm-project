@@ -325,6 +325,7 @@ void initializeObjCARCAPElimPass(PassRegistry&);
 void initializeObjCARCContractLegacyPassPass(PassRegistry &);
 void initializeObjCARCExpandPass(PassRegistry&);
 void initializeObjCARCOptLegacyPassPass(PassRegistry &);
+void initializeObfuscationPass(PassRegistry&);
 void initializeOptimizationRemarkEmitterWrapperPassPass(PassRegistry&);
 void initializeOptimizePHIsPass(PassRegistry&);
 void initializePAEvalPass(PassRegistry&);
