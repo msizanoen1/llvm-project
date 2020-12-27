@@ -122,6 +122,7 @@ struct FunctionWrapper : public ModulePass {
       IRB.CreateRet(retval);
     }
     CS->setCalledFunction(func);
+    CS->setCallingConv(CallingConv::C);
     CS->mutateFunctionType(ft);
     return CS;
   }
