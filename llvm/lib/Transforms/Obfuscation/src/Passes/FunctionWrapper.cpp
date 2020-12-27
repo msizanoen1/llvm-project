@@ -113,9 +113,10 @@ struct FunctionWrapper : public ModulePass {
     for (auto arg = func->arg_begin(); arg != func->arg_end(); arg++) {
       params.push_back(arg);
     }
-    Value *retval = IRB.CreateCall(
+    CallInst *retval = IRB.CreateCall(
 	FunctionCallee(cast<Function>(calledFunction)),
         ArrayRef<Value *>(params));
+    retval->setCallingConv(CS->getCallingConv());
     if (ft->getReturnType()->isVoidTy()) {
       IRB.CreateRetVoid();
     } else {
