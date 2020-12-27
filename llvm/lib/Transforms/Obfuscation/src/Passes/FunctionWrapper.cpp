@@ -1,7 +1,6 @@
 // For licensing terms, please read LICENSE.md in this repository.
 //===----------------------------------------------------------------------===//
 #include "llvm/Transforms/Obfuscation/Obfuscation.h"
-#include "llvm/IR/Attributes.h"
 #include "llvm/IR/AbstractCallSite.h"
 #include "llvm/IR/Constants.h"
 #include "llvm/IR/IRBuilder.h"
@@ -105,7 +104,6 @@ struct FunctionWrapper : public ModulePass {
     Function *func =
         Function::Create(ft, GlobalValue::LinkageTypes::InternalLinkage,
                          "HikariFunctionWrapper", CS->getParent()->getModule());
-    func->addFnAttr(Attribute::UWTable);
     // Trolling was all fun and shit so old implementation forced this symbol to
     // exist in all objects
     appendToCompilerUsed(*func->getParent(), {func});
