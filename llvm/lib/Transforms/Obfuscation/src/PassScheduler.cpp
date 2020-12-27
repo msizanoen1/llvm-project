@@ -206,8 +206,8 @@ ModulePass *createObfuscationPass() {
   } else {
     cryptoutils->prng_seed();
   }
-  cout << "Initializing Hikari Core with Revision ID:" <<""// GIT_COMMIT_HASH
-       << endl;
+  //cout << "Initializing Hikari Core with Revision ID:" <<""// GIT_COMMIT_HASH
+  //     << endl;
   return new Obfuscation();
 }
 } // namespace llvm
