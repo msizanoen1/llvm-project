@@ -96,7 +96,10 @@ struct FunctionWrapper : public ModulePass {
     }
     // Create a new function which in turn calls the actual function
     vector<Type *> types;
+    FunctionType *ft_orig = cast<Function>(calledFunction)->getFunctionType();
     for (unsigned i = 0; i < CS->getNumArgOperands(); i++) {
+      if (CS->getArgOperand(i)->getType() != ft_orig->getParamType(i))
+	return nullptr; // skeeeep
       types.push_back(CS->getArgOperand(i)->getType());
     }
     FunctionType *ft =
