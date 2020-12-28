@@ -96,9 +96,8 @@ struct FunctionWrapper : public ModulePass {
     }
     // Create a new function which in turn calls the actual function
     vector<Type *> types;
-    FunctionType *ft_orig = cast<Function>(calledFunction)->getFunctionType();
-    for (Type *ty : ft_orig->params()) {
-      types.push_back(ty);
+    for (unsigned i = 0; i < CS->getNumArgOperands(); i++) {
+      types.push_back(CS->getArgOperand(i)->getType());
     }
     FunctionType *ft =
         FunctionType::get(CS->getType(), ArrayRef<Type *>(types), false);
